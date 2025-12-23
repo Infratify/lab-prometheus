@@ -1,0 +1,15 @@
+[nodes]
+%{ for instance in instances ~}
+${instance.tags_all.Name} ansible_host=${instance.public_ip}
+%{ endfor ~}
+
+[server]
+${prometheus.tags_all.Name} ansible_host=${prometheus.public_ip}
+
+[exporters]
+${prometheus_node_exporter.tags_all.Name} ansible_host=${prometheus_node_exporter.public_ip}
+
+[nodes:vars]
+ansible_user=ubuntu
+ansible_ssh_private_key_file=${ssh_private_key}
+ansible_python_interpreter=/usr/bin/python3
