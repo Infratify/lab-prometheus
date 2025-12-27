@@ -9,7 +9,7 @@ module "prometheus_ec2" {
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [module.prometheus_security_group.security_group_id]
   associate_public_ip_address = true
-  key_name                    = aws_key_pair.ansible.key_name
+  key_name                    = aws_key_pair.prometheus.key_name
 }
 
 module "prometheus_node_exporter_ec2" {
@@ -23,5 +23,5 @@ module "prometheus_node_exporter_ec2" {
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [module.prometheus_node_exporter_security_group.security_group_id]
   associate_public_ip_address = true
-  key_name                    = aws_key_pair.ansible.key_name
+  key_name                    = aws_key_pair.prometheus.key_name
 }

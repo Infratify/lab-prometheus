@@ -5,11 +5,11 @@ resource "tls_private_key" "ssh_key" {
 
 resource "local_file" "private_key_pem" {
   content         = tls_private_key.ssh_key.private_key_pem
-  filename        = "../ansible/ansible-key.pem"
+  filename        = "../ansible/prometheus-key.pem"
   file_permission = "0400"
 }
 
-resource "aws_key_pair" "ansible" {
-  key_name   = "ansible-key"
+resource "aws_key_pair" "prometheus" {
+  key_name   = "prometheus-key"
   public_key = tls_private_key.ssh_key.public_key_openssh
 }
